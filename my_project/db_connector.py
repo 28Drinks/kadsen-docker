@@ -64,7 +64,7 @@ class DbWriter():
                 base_share_value=data[a][1],
                 bots_quantity=data[a][2],
                 share_quantity=data[a][3],
-                date=tomorrow
+                date=today
             )
             db.session.add(newShare)
             db.session.commit()

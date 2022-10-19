@@ -169,8 +169,8 @@ class Rollbit():
 
         return sport_value_dict
 
-# if __name__ == '__main__':
-def main():
+if __name__ == '__main__':
+# def main():
     print("getting the script going!")
 
     # web driver settings
