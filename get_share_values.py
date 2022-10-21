@@ -177,10 +177,12 @@ if __name__ == '__main__':
     chromedriver_autoinstaller.install(cwd=True)
     options = Options()
     options.add_argument('--headless')
+    options.add_experimental_option("excludeSwitches", ["enable-logging"])
+
     # options.add_argument('--no-sandbox')
     # options.add_argument('--disable-gpu')
     # options.add_argument('--disable-extensions')
-    # options.add_experimental_option("excludeSwitches", ["enable-logging"])
+
 
     driver = webdriver.Chrome(options=options)
     # executable_path=binary_path #path for module imported, not working
