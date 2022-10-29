@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="../static/reveal.css">
+
+
+<div class="container">
+  <section>
+    {% for type in trait_types %}
+
+      <h1> {{ type }} :</h1>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Count</th>
+          <th>Revealed</th>
+          <th>Left</th>
+          <th>Value</th>
+        </tr>
+
+          {% for dict in result %}
+            {% for x in result[dict] %}
+                {% if dict == type %}
+                <tr>
+                <td> {{ x }}</td>
+                <td> {{ result[dict][x][0] }}</td>
+                {% if x == "Special" %}
+                    <td> 25 </td>
+                    <td> 1 </td>
+                {% endif %}
+                {% if x != "Special" %}
+                    <td> {{ result[dict][x][1] }}</td>
+                    <td> {{ result[dict][x][2] }}</td>
+                {% endif %}
+                <td> {{ result[dict][x][3]  }}</td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+          {% endfor %}
+      </table>
+    {% endfor %}
+
+  </section>
+
+</div>
+
+{% endblock %}
