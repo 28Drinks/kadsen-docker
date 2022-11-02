@@ -20,9 +20,11 @@ def share_today():
     previous_week1 = datetime.today() - timedelta(days=7)
     previous_week = previous_week1.strftime('%Y-%m-%d')
 
-    share_data_today = SportsShare.query.filter(SportsShare.date == today).order_by(SportsShare.combined_share_value.desc()).all()
-    share_data_yesterday = SportsShare.query.filter(SportsShare.date == yesterday).order_by(SportsShare.combined_share_value.desc()).all()
-    share_data_previous_week = SportsShare.query.filter(SportsShare.date == previous_week).order_by(SportsShare.combined_share_value.desc()).all()
+    share_data_today_ordered_desc = SportsShare.query.filter(SportsShare.date == today).order_by(SportsShare.combined_share_value.desc()).all()
+
+    share_data_today = SportsShare.query.filter(SportsShare.date == today).order_by(SportsShare.sport.desc()).all()
+    share_data_yesterday = SportsShare.query.filter(SportsShare.date == yesterday).order_by(SportsShare.sport.desc()).all()
+    share_data_previous_week = SportsShare.query.filter(SportsShare.date == previous_week).order_by(SportsShare.sport.desc()).all()
 
     # something is wrong with DOTA.... the data in db is correct, only the "share_today" display is wrong....no idea why
     # dota test:
@@ -39,6 +41,8 @@ def share_today():
     bots_quantity = {}
     for today,yesterday,week in zip(share_data_today, share_data_yesterday,share_data_previous_week):
         # print(t.sport,t.value,y.sport,y.value)
+
+        print(f"today:", today.sport , "yesterday:", yesterday.sport,"week:", week.sport)
         sport = today.sport
 
         # daily
@@ -58,7 +62,7 @@ def share_today():
         share_quantity[sport] = today.share_quantity
         bots_quantity[sport] = today.bots_quantity
 
-    return render_template("share_today.html", page_title="Share Today", share_data_today=share_data_today, change_in_percentage=change_in_percentage, change_in_dollar_week=change_in_dollar_week, change_in_percentage_week=change_in_percentage_week,change_in_dollar=change_in_dollar, base_share_value=base_share_value, share_quantity=share_quantity, bots_quantity=bots_quantity)
+    return render_template("share_today.html", page_title="Share Today", share_data_today=share_data_today,share_data_today_ordered_desc=share_data_today_ordered_desc, change_in_percentage=change_in_percentage, change_in_dollar_week=change_in_dollar_week, change_in_percentage_week=change_in_percentage_week,change_in_dollar=change_in_dollar, base_share_value=base_share_value, share_quantity=share_quantity, bots_quantity=bots_quantity)
 
 
 # not refactored
