@@ -32,10 +32,13 @@ def landing_page():
 
     print(datetime.now())
 
-    black_list = ["total"]
+    black_list = ["total","Special"]
 
-    all_share_data_today = SportsShare.query.filter(SportsShare.date == today).order_by(SportsShare.combined_share_value.desc()).all()
-    all_share_data_yesterday = SportsShare.query.filter(SportsShare.date == yesterday).order_by(SportsShare.combined_share_value.desc()).all()
+    all_share_data_today_orderded_volume_desc = SportsShare.query.filter(SportsShare.date == today).order_by(SportsShare.combined_share_value.desc()).all()
+
+
+    all_share_data_today = SportsShare.query.filter(SportsShare.date == today).order_by(SportsShare.sport.desc()).all()
+    all_share_data_yesterday = SportsShare.query.filter(SportsShare.date == yesterday).order_by(SportsShare.sport.desc()).all()
 
 
     top_moover_percent = {}
@@ -60,7 +63,7 @@ def landing_page():
     highest_dollar = list(top_moover_dollar)[-1]
 
     #top 4 sports by combined share value
-    top_sports = [x for x in all_share_data_today[:5] if x.sport not in black_list]
+    top_sports = [x for x in all_share_data_today_orderded_volume_desc[:6] if x.sport not in black_list]
 
     movement_dict = {"lowest_percent": lowest_percent, "highest_percent": highest_percent, "lowest_dollar": lowest_dollar, "highest_dollar": highest_dollar}
 

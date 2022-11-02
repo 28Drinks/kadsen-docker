@@ -42,7 +42,7 @@ def share_today():
     for today,yesterday,week in zip(share_data_today, share_data_yesterday,share_data_previous_week):
         # print(t.sport,t.value,y.sport,y.value)
 
-        print(f"today:", today.sport , "yesterday:", yesterday.sport,"week:", week.sport)
+        # print(f"today:", today.sport , "yesterday:", yesterday.sport,"week:", week.sport)
         sport = today.sport
 
         # daily
