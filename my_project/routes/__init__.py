@@ -40,6 +40,7 @@ def landing_page():
     all_share_data_today = SportsShare.query.filter(SportsShare.date == today).order_by(SportsShare.sport.desc()).all()
     all_share_data_yesterday = SportsShare.query.filter(SportsShare.date == yesterday).order_by(SportsShare.sport.desc()).all()
 
+    print(all_share_data_yesterday)
 
     top_moover_percent = {}
     top_moover_dollar = {}
