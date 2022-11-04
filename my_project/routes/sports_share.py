@@ -26,12 +26,6 @@ def share_today():
     share_data_yesterday = SportsShare.query.filter(SportsShare.date == yesterday).order_by(SportsShare.sport.desc()).all()
     share_data_previous_week = SportsShare.query.filter(SportsShare.date == previous_week).order_by(SportsShare.sport.desc()).all()
 
-    # something is wrong with DOTA.... the data in db is correct, only the "share_today" display is wrong....no idea why
-    # dota test:
-    # dota_test = SportsShare.query.filter(SportsShare.sport == "Dota").order_by(SportsShare.date.desc()).all()
-    # for x in dota_test:
-    #     print(x.combined_share_value)
-
     change_in_dollar = {}
     change_in_percentage = {}
     change_in_dollar_week = {}
