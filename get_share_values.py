@@ -225,7 +225,6 @@ if __name__ == '__main__':
             allBots += botsQuantity_dict[x]
         calculated_dict["total"] = [ totalShare, 0 , allBots , 0]
 
-        #update stuck?
         print(calculated_dict)
         DbWriter.write_share_data_to_db(calculated_dict)
 
