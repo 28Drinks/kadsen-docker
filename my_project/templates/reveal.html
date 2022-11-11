@@ -6,6 +6,23 @@
 
 <div class="container">
   <section>
+    <h1>Unrevealed: {{ total_left }}</h1>
+    <h1>Average stats for Unrevealed:</h1>
+    <table>
+      <tr>
+        <th>Background</th>
+        <th>Eyes</th>
+        <th>Teeth</th>
+        <th>Body</th>
+      </tr>
+      <tr>
+        <th>{{ "%.2f"|format(total_background_worth / total_left) }}</th>
+        <th>{{ "%.2f"|format(total_eye_worth / total_left) }}</th>
+        <th>{{ "%.2f"|format(total_teeth_worth / total_left) }}</th>
+        <th>{{ "%.2f"|format(total_body_worth / total_left) }}</th>
+      </tr>
+    </table>
+
     {% for type in trait_types %}
 
       <h1> {{ type }} </h1>
