@@ -39,7 +39,7 @@ def roi():
             if bot.sport is not None:
                 base_share = share_object.base_share_value
                 bot_share = base_share * bot.sportshares
-                
+
                 return_values_calculated = calculateReturn(int(bot.freebet), float(bot_share), float(bet_setting), float(share_setting))
 
 

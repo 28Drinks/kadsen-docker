@@ -232,6 +232,3 @@ if __name__ == '__main__':
         driver.quit()
     finally:
         driver.quit()
-
-
-    #build test ??
