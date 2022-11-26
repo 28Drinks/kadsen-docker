@@ -11,10 +11,14 @@
             <p>eg. "28"</p>
             <form method="POST"class="responsive-post-form">
                 Sportsbot #<input type="number" step="1" min="0" max="9999" name="input_bot_number" value="{{ bot_number }}">
-                Share %<input name="share_setting" value="{{ share_setting }}" placeholder="100">
-                Freebet %<input name="bet_setting" value="{{ bet_setting }}" placeholder="50">
+                <div id="options-form">
+                    <p>Adjust the variables for Yearly Return calculation.<br> Default is 100% Share and 50% Freebt</p>
+                    Share %<input name="share_setting" value="{{ share_setting }}" placeholder="100">
+                    Freebet %<input name="bet_setting" value="{{ bet_setting }}" placeholder="50">
+                </div>
                 <input type="submit" value="Submit">
             </form>
+        <button id="options-btn" class="options-button" onclick="toggleVisibility()">Share / Bet % Settings</button>
         </div>
         <h1>Price / ROI Calculator:</h1>
         <div class="calculator-form">
@@ -50,8 +54,10 @@
                 </div>
             <div class="info">
                 <h4>Yearly Share: (Share ${{ base_share }} * {{ bot.sportshares }} * 12 * {{ share_setting|float / 100 }})</h4>
+                <h6>(Share Value * Amount of Shares[Body] * 12[Months] * {{ share_setting|float }}%[{{ share_setting|float / 100 }}])</h6>
                 <h3>$ {{'%0.2f'| format(return_values_calculated["share_return"]) }}</h3>
                 <h4>Yearly Freebet: (Freebet ${{ bot.freebet }} * 12 * {{ bet_setting|float / 100 }})</h4>
+                <h6>(Freebet Value * 12[Months] * {{ bet_setting|float}}%[{{ bet_setting|float / 100 }}][Average return on Freebet])</h6>
                 <h3>$ {{'%0.2f'| format(return_values_calculated["bet_return"]) }}</h3>
                 <span><h3>Yearly return:</h3><h1 style="color: #72f238;">$ {{ '%0.2f'| format(return_values_calculated["total_return"]) }}</h1></span>
             </div>

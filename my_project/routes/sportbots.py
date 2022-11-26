@@ -53,5 +53,4 @@ def roi():
             # need to make this better, for now set variables to 0 for unrevealed bot
             return render_template("roi-result.html", bot=bot, return_values_calculated={"bet_return" : 0, "share_return": 0, "total_return": 0, "price": 0}, share_setting=0, bet_setting=0)
 
-    
     return render_template("roi.html", pagetitle="ROI")
