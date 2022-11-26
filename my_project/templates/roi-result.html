@@ -11,12 +11,12 @@
             <p>eg. "28"</p>
             <form method="POST"class="responsive-post-form">
                 Sportsbot #<input type="number" step="1" min="0" max="9999" name="input_bot_number" value="{{ bot_number }}">
+                <input type="submit" value="Submit">
                 <div id="options-form">
-                    <p>Adjust the variables for Yearly Return calculation.<br> Default is 100% Share and 50% Freebt</p>
+                    <p>Adjust the variables for yearly return calculation.<br> Default is 100% Share and 50% Freebet</p>
                     Share %<input name="share_setting" value="{{ share_setting }}" placeholder="100">
                     Freebet %<input name="bet_setting" value="{{ bet_setting }}" placeholder="50">
                 </div>
-                <input type="submit" value="Submit">
             </form>
         <button id="options-btn" class="options-button" onclick="toggleVisibility()">Share / Bet % Settings</button>
         </div>
