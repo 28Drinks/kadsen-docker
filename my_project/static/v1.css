@@ -1,0 +1,114 @@
+
+p {
+    margin: 0 !important;
+}
+h3 {
+    margin-top: 0px !important;
+    margin-bottom: 10px !important;
+}
+
+.form-container {
+    color: white;
+    margin-top: 25px;
+    padding: 10px 20px;
+    width: 100%;
+    background-color: #1F2330;
+    border-radius: 12px;
+    display: block;
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+@media only screen and (max-width: 1400px) {
+    .responsive-form {
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .responsive-form input {
+        margin: 10px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .responsive-post-form {
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .responsive-post-form input {
+        margin: 10px;
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    .responsive-post-form input {
+        margin-bottom: 10px;
+    }
+}
+
+.post-form {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: ;
+}
+
+.split {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+@media only screen and (max-width: 800px) {
+    .split {
+        flex-direction: column;
+    }
+}
+
+.info {
+    margin-top: 25px;
+    padding: 10px;
+    text-align: center;
+    background-color: rgb(255, 240, 31, 0.2);
+    color: #161925;
+    border-radius: 4px;
+    border: 1px solid #FFF01F;
+}
+
+input {
+    color: ;
+    background-color: #1A1D29;
+    border: 0px solid white;
+    border-radius: 4px;
+    padding: 15px 20px 15px 20px;
+
+}
+
+#roi {
+    color: #FFF01F;
+}
+#yreturn {
+    color: #72f238;
+}
+
+.result-container {
+    color: white;
+    margin-top: 25px;
+    padding: 10px 20px;
+    width: 100%;
+    background-color: #1F2330;
+    border-radius: 12px;
+    display: block;
+    text-align: center;
+}
+
+.results {
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+    background-color: #1A1D29;
+    border-radius: 12px;
+    display: block;
+    text-align: center;
+}

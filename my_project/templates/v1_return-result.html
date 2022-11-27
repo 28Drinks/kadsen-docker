@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="..//static/v1.css">
+
+<section style="margin-bottom: 50px">
+    <div class="form-container">
+        <h1>Calculate V1 return based on Lotto Shares:</h1>
+        <div class="post-form">
+            <p>eg. "120"</p>
+            <form method="POST" class="responsive-post-form">
+                Rlb Shares in thousands<input type="number" step="1" min="0" max="1000" name="rlb_share_value" value="{{ lotto_shares }}">
+                <input type="submit">
+            </form>
+        </div>
+    </div>
+
+    <div class="info">
+        <h3>Explanation:</h3>
+        <p>Rlb gain calculation formula by Rigster.<br>
+            Variables: <br>
+            1 Lottery each 0.6717 Days<br>
+            60 RLB per 100k Shares (average Lottery Stake of 2.5B)<br>
+            RLB valued at 0.0022 $
+        </p>
+    </div>
+
+    <div class="result-container">
+        <div class="results">
+            <h3>Yearly RLB gain:</h3>
+            <h1>Rlb {{ '%0.2f'| format(calcResult[0]) }}</h1>
+
+            <h3>Dollar worth:</h3>
+            <h1>$ {{ '%0.2f'| format(calcResult[1]) }}</h1>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

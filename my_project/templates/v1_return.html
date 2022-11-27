@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="..//static/v1.css">
+
+<section style="margin-bottom: 50px">
+    <div class="form-container">
+        <h1>Calculate V1 return based on Lotto Shares:</h1>
+        <div class="post-form">
+            <p>eg. "120"</p>
+            <form method="POST" class="responsive-post-form">
+                Rlb Shares in thousands<input type="number" step="1" min="0" max="1000" name="rlb_share_value" value="{{ lotto_shares }}">
+                <input type="submit">
+            </form>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}
