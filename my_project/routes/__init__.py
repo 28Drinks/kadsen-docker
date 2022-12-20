@@ -30,7 +30,7 @@ def landing_page():
     yesterday1 = datetime.now() - timedelta(days=1)
     yesterday = yesterday1.strftime('%Y-%m-%d')
 
-    print(datetime.now())
+    # print(datetime.now())
 
     black_list = ["total","Special"]
 
@@ -73,6 +73,6 @@ def landing_page():
 @app.route("/reources_page")
 def resources_page():
 
-    print("hello from resources")
+    # print("hello from resources")
 
     return render_template("resources.html", pagetitle="Resources")
