@@ -12,6 +12,9 @@
          <h3>Toggle Day/Week</h3>
       </div>
       <div class="sport-container" id="day">
+         <!-- looking if the data is defined or the return from the routes except is cooming -->
+      {% if share_data_today_ordered_desc is defined %}
+
          {% for x in share_data_today_ordered_desc %}
             {% if x.sport == "total" %}
                <div class="total sport-day">
@@ -65,6 +68,8 @@
             {% endif %}
          {% endfor %}
       </div>
+
+
 
    <!-- same as above with differenct values -->
    <!-- js to toggle visibility between -->
@@ -123,6 +128,10 @@
             {% endif %}
          {% endfor %}
       </div>
+      {% else %}
+         <h3>Something went wrong.. prob soon available</h3>
+      {% endif %}
+
    </div>
 </section>
 

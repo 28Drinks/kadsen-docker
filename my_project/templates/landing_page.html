@@ -34,6 +34,7 @@
             {% endfor %}
         </div>
         <h3>Biggest Mover:</h3>
+        {% if movement_dict is defined %}
         <div class="top-moover split">
             <div class="percentage">
                 <p style="text-align: center;">%</p>
@@ -58,6 +59,9 @@
                 </div>
             </div>
         </div>
+        {% else %}
+            <h3>Something went wrong.. prob soon available</h3>
+        {% endif %}
     </div>
 
     <div class="preview-container">

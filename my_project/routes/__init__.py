@@ -31,43 +31,44 @@ def landing_page():
     yesterday = yesterday1.strftime('%Y-%m-%d')
 
     # print(datetime.now())
+    try:
+        black_list = ["total","Special"]
 
-    black_list = ["total","Special"]
-
-    all_share_data_today_orderded_volume_desc = SportsShare.query.filter(SportsShare.date == today).order_by(SportsShare.combined_share_value.desc()).all()
+        all_share_data_today_orderded_volume_desc = SportsShare.query.filter(SportsShare.date == today).order_by(SportsShare.combined_share_value.desc()).all()
 
 
-    all_share_data_today = SportsShare.query.filter(SportsShare.date == today).order_by(SportsShare.sport.desc()).all()
-    all_share_data_yesterday = SportsShare.query.filter(SportsShare.date == yesterday).order_by(SportsShare.sport.desc()).all()
+        all_share_data_today = SportsShare.query.filter(SportsShare.date == today).order_by(SportsShare.sport.desc()).all()
+        all_share_data_yesterday = SportsShare.query.filter(SportsShare.date == yesterday).order_by(SportsShare.sport.desc()).all()
 
-    top_moover_percent = {}
-    top_moover_dollar = {}
+        top_moover_percent = {}
+        top_moover_dollar = {}
 
-    for today,yesterday in zip(all_share_data_today, all_share_data_yesterday):
-        if today.sport not in black_list:
-            sport = today.sport
-            change_value = today.combined_share_value - yesterday.combined_share_value
-            change_percent = ((today.combined_share_value - yesterday.combined_share_value) / yesterday.combined_share_value) * 100
-            top_moover_percent[sport] = round(change_percent, 2)
-            top_moover_dollar[sport] = round(change_value, 2)
+        for today,yesterday in zip(all_share_data_today, all_share_data_yesterday):
+            if today.sport not in black_list:
+                sport = today.sport
+                change_value = today.combined_share_value - yesterday.combined_share_value
+                change_percent = ((today.combined_share_value - yesterday.combined_share_value) / yesterday.combined_share_value) * 100
+                top_moover_percent[sport] = round(change_percent, 2)
+                top_moover_dollar[sport] = round(change_value, 2)
 
-    #sort low to high for %
-    top_moover_percent = sorted(top_moover_percent.items(), key=lambda item: item[1])
-    highest_percent = list(top_moover_percent)[0]
-    lowest_percent = list(top_moover_percent)[-1]
+        #sort low to high for %
+        top_moover_percent = sorted(top_moover_percent.items(), key=lambda item: item[1])
+        highest_percent = list(top_moover_percent)[0]
+        lowest_percent = list(top_moover_percent)[-1]
 
-    #sort low to high for $
-    top_moover_dollar = sorted(top_moover_dollar.items(), key=lambda item: item[1])
-    lowest_dollar = list(top_moover_dollar)[0]
-    highest_dollar = list(top_moover_dollar)[-1]
+        #sort low to high for $
+        top_moover_dollar = sorted(top_moover_dollar.items(), key=lambda item: item[1])
+        lowest_dollar = list(top_moover_dollar)[0]
+        highest_dollar = list(top_moover_dollar)[-1]
 
-    #top 4 sports by combined share value
-    top_sports = [x for x in all_share_data_today_orderded_volume_desc[:6] if x.sport not in black_list]
+        #top 4 sports by combined share value
+        top_sports = [x for x in all_share_data_today_orderded_volume_desc[:6] if x.sport not in black_list]
 
-    movement_dict = {"lowest_percent": lowest_percent, "highest_percent": highest_percent, "lowest_dollar": lowest_dollar, "highest_dollar": highest_dollar}
+        movement_dict = {"lowest_percent": lowest_percent, "highest_percent": highest_percent, "lowest_dollar": lowest_dollar, "highest_dollar": highest_dollar}
 
-    return render_template("landing_page.html", page_title="Landing Page", movement_dict=movement_dict, top_sports=top_sports[:4])
-
+        return render_template("landing_page.html", page_title="Landing Page", movement_dict=movement_dict, top_sports=top_sports[:4])
+    except:
+        return render_template("landing_page.html", page_title="Landing Page")
 
 
 @app.route("/reources_page")
