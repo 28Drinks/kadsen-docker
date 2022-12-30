@@ -18,8 +18,7 @@ def share_today():
         today = today1.strftime('%Y-%m-%d')
         yesterday1 = datetime.now() - timedelta(days=1)
         yesterday = yesterday1.strftime('%Y-%m-%d')
-        #change this back to 7
-        previous_week1 = datetime.today() - timedelta(days=8)
+        previous_week1 = datetime.today() - timedelta(days=7)
         previous_week = previous_week1.strftime('%Y-%m-%d')
 
         share_data_today_ordered_desc = SportsShare.query.filter(SportsShare.date == today).order_by(SportsShare.combined_share_value.desc()).all()
