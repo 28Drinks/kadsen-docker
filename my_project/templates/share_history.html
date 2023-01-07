@@ -46,6 +46,7 @@
          </select>
          <button class="clearbtn" onclick="reset()">Clear Selection</button>
          <script>
+
             const mylabel = {{ label | safe }}
 
             function createOptionElement(sport_name) {
@@ -64,32 +65,92 @@
                var value = selectedSport.value;
                var index = mylabel.indexOf(value);
                clear();
-               draw(index);
+               draw(index,values, my_slice);
             };
          </script>
 
+      </div>
+
+      <div class="testing">
+         <button class="rangeButton" onclick="displayRange(7)">Week(7)</button>
+         <button class="rangeButton" onclick="displayRange(28)">Month(28)</button>
+         <button class="rangeButton" onclick="displayRange(0)">All</button>
+         <!-- <button class="allRange" onclick="eachSport()">Delete every Second entry</button> -->
       </div>
 
       <!-- js below creates all charts in this container -->
       <div class="charts-container" id="charts-container">
          <script>
             window.onload = function() {
+               mediaQueryFunction(windowSize);
                sortBodyFunction();
-               draw_all();
+               draw_all(values);
             };
+
+            var myBaseValues;
+            var myCombinedValues;
+
+            var mylabels;
+
+            var windowSize = window.matchMedia("(max-width: 1000px")
+            // mediaQueryFunction(windowSize)
+            // windowSize.addListener(mediaQueryFunction)
+
+            // media query => change values to lesser points for phone
+            function mediaQueryFunction(windowSize) {
+               if (windowSize.matches) {
+                  console.log("small")
+
+                  mylabels = {{ labels | safe }}
+
+                  myBaseValues = {{ values_base | safe }}
+                  myCombinedValues = {{ values_combined | safe }}
+
+
+                  for (let i = 0, len = mylabels.length; i < len; i++) {
+                     mylabels[i] = mylabels[i].filter(function(_, i) {
+                        return i % 3 === 0;
+                     })
+                  }
+
+                  for (let i = 0, len = myBaseValues.length; i < len; i++) {
+                     myBaseValues[i] = myBaseValues[i].filter(function(_, i) {
+                        return i % 3 === 0;
+                     })
+                  }
+
+                  for (let i = 0, len = myCombinedValues.length; i < len; i++) {
+                     myCombinedValues[i] = myCombinedValues[i].filter(function(_, i) {
+                        return i % 3 === 0;
+                     })
+                  }
+
+               } else {
+                  console.log("big")
+                  mylabels = {{ labels | safe }}
+                  myBaseValues = {{ values_base | safe }}
+                  myCombinedValues = {{ values_combined | safe }}
+               }
+            }
+
+            var my_slice = 0
+
+            function displayRange(x) {
+               my_slice = -x;
+               refresh(my_slice)
+            }
 
             var values = [];
 
             function displaySortedByBody(){
                sortBodyFunction();
-               refresh();
+               refresh(my_slice);
             }
 
             function sortBodyFunction(){
                values.splice(0,values.length)
-               const input = document.querySelector('input[name="sort"]:checked').value;
-               const myBaseValues = {{ values_base | safe }}
-               const myCombinedValues = {{ values_combined | safe }}
+               var input = document.querySelector('input[name="sort"]:checked').value;
+
                if (input == "total") {
                   for (let i = 0, len = myCombinedValues.length; i < len; i++) {
                      var b = myCombinedValues[i];
@@ -103,21 +164,19 @@
                }
             };
 
-            const mylabels = {{ labels | safe }}
-
-            function refresh() {
+            function refresh(my_slice) {
                var elements = document.getElementsByClassName("work");
-               console.log(elements)
+               // console.log(elements)
                if (typeof elements !== 'undefined') {
                   var ids = [];
                   for (var i = 0; i < elements.length; i++) {
-                     console.log(elements[i].id);
+                     // console.log(elements[i].id);
                      ids.push((elements[i].id));
                   }
                   clear();
                   for (var i = 0; i < ids.length; i++) {
                      var index = mylabel.indexOf(ids[i]);
-                     draw(index);
+                     draw(index,values=values, my_slice);
                   }
                } else {
                   console.log("leeel")
@@ -139,17 +198,19 @@
                }
                checkboxes[checkboxes.length - 1].checked = true;
 
+               my_slice = 0
                clear();
                sortBodyFunction();
-               draw_all();
+               draw_all(values);
             };
 
-            function draw_all() {
+            function draw_all(values) {
                for (let i = 0; i < mylabel.length; i++) {
-                  draw(i);
+                  draw(i,values, my_slice);
                };
             };
-               function draw(i) {
+               function draw(i, values, my_slice) {
+                  values = values
                   if (mylabel[i] == "total") {
                      console.log("got em")
                   } else {
@@ -157,6 +218,7 @@
                      const config = {
                         type: 'line',
                         options: {
+                           responsive: true,
                            scales: {
                               x: {
                                  display: true,
@@ -166,7 +228,9 @@
                               },
                               y: {
                                  display: true,
-                                 type: 'logarithmic',
+                                 // type: 'logarithmic',
+                                 suggestedMin: 0,
+                                 suggestedMax: 0,
                                  ticks: {
                                     color: "white"
                                  },
@@ -197,14 +261,18 @@
 
                      const ctx = document.getElementById(mylabel[i]);
 
+
+                     // console.log(mylabels[i].slice(my_slice))
+                     // console.log(values[i].slice(my_slice))
+
                      const myChart = new Chart(ctx, {
                         type: config["type"],
                         data: {
-                           labels: mylabels[i],
+                           labels: mylabels[i].slice(my_slice),
                            datasets: [
                                  {
                                     label: mylabel[i],
-                                    data: values[i],
+                                    data: values[i].slice(my_slice),
                                     backgroundColor: 'rgb(0, 176, 3, 0.05)',
                                     borderColor: 'rgb(0, 176, 3)',
                                     borderWidth: 2,

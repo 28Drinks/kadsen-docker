@@ -16,16 +16,48 @@ input {
     justify-content: space-evenly;
     padding: 25px 0 25px 0;
 }
-
 .charts-container > div {
-    width: 80%;
+    padding: 10px;
+    background-color: #1F2330;
+    border-radius: 12px;
+    margin-bottom: 50px;
+    width: 400px;
 }
-
-/* @media only screen and (min-width: 1400px) {
+/* phones < 600 */
+@media only screen and (max-width: 600px) {
     .charts-container > div {
-        width: 40%;
+        width: 400px;
+        height: auto;
     }
-} */
+}
+/* tables & phone >600 */
+@media only screen and (min-width: 600px) {
+    .charts-container > div {
+        width: 600px;
+        height: auto;
+    }
+}
+/* medium 768px */
+@media only screen and (min-width: 768px) {
+    .charts-container > div {
+        width: 700px;
+        height: auto;
+    }
+}
+/* large tables, laptop 992px */
+@media only screen and (min-width: 992px) {
+    .charts-container > div {
+        width: 800px;
+        height: auto;
+    }
+}
+/* large, desktop 1200px + */
+@media only screen and (min-width: 1200px) {
+    .charts-container > div {
+        width: 1000px;
+        height: auto;
+    }
+}
 
 .container-field {
     width: 60%;
@@ -69,14 +101,27 @@ input {
     cursor: pointer;
   }
 
+.rangeButton {
+    background-color: gray;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
   .sports {
     padding: 8px 16px;
   }
 
 
-  .charts-container > div {
-    padding: 10px;
-    background-color: #1F2330;
-    border-radius: 12px;
-    margin-bottom: 50px;
-  }
+
+
+.work {
+    min-height: 250px;
+}
