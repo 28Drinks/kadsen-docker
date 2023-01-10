@@ -10,7 +10,7 @@ import json
 @app.route("/reveal")
 def whats_left():
 
-    with open('whats-left.json') as f:
+    with open('whats-left_new.json') as f:
         result = json.load(f)
 
     trait_types = ["Background","Eyes","Teeth","Body"]

@@ -93,4 +93,22 @@ class DbWriter():
             db.session.add(newBot)
             db.session.commit()
 
- 
+
+    def update_revealed_bot(data):
+        for bot in data:
+            bot_to_update = SportBot.query.filter_by(name=bot["name"]).first()
+
+            bot_to_update.revealed = True
+
+            bot_to_update.image_url = bot["image_url"]
+
+            bot_to_update.sportshares = bot["sportshares"]
+            bot_to_update.freebet = bot["freebet"]
+            bot_to_update.comboboost = bot["comboboost"]
+
+            bot_to_update.body = bot["body"]
+            bot_to_update.sport = bot["sport"]
+            bot_to_update.eyes = bot["eyes"]
+            bot_to_update.teeth = bot["teeth"]
+
+            db.session.commit()
